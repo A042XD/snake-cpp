@@ -23,10 +23,11 @@ void add(short x,short y){
   sp.push_front(mp(x,y));
 }
 void createFood(){
-  fdx=rand()%15+1,fdy=rand()%15+1;
+  fdx=rand()%15+1;
+  fdy=rand()%15+1;
 }
 void drawFood(){
-  moveCursor(fdx+1,fdy+3);puts("@");
+  text(fdx+1,fdy+3,"@");
 }
 
 
@@ -68,8 +69,7 @@ int main(){
 
     // Eat Food
     if(x==fdx+1&&y==fdy+3){
-      fdx=rand()%15+1;
-      fdy=rand()%15+1;
+      createFood();
       continue;
     }
     text(sp.back().f,sp.back().s,".");

@@ -13,7 +13,7 @@ void clear();
 bool keyDown(int k);
 void moveCursor(int x,int y);
 void fill(int x1,int y1,int x2,int y2,char c);
-void text(int x,int y,char s[]);
+void text(int x,int y,const char*s);
 
 void clear(){
   system("cls");
@@ -32,7 +32,18 @@ void fill(int x1,int y1,int x2,int y2,char c){
     for(int j=y1;j<=y2;j++)
       moveCursor(i,j),printf("%c",c);
 }
-void text(int x,int y,char s[]){
+void text(int x,int y,const char*s){
   moveCursor(x,y);
   printf("%s",s);
+}
+COORD getConsoleSize(){
+  CONSOLE_SCREEN_BUFFER_INFO csbi;
+  int columns, rows;
+  GetConsoleScreenBufferInfo(GetStdHandle(STD_OUTPUT_HANDLE), &csbi);
+  columns = csbi.srWindow.Right - csbi.srWindow.Left + 1;
+  rows = csbi.srWindow.Bottom - csbi.srWindow.Top + 1;
+  COORD a;
+  a.X=columns;
+  a.Y=rows;
+  return a;
 }
