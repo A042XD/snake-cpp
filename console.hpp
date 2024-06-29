@@ -11,7 +11,7 @@
 #define s second
 
 void clear();
-bool keyDown(int k);
+bool keyDown(unsigned int k);
 void moveCursor(int x,int y);
 void fill(int x1,int y1,int x2,int y2,char c);
 void text(int x,int y,const char*s);
@@ -19,7 +19,7 @@ void text(int x,int y,const char*s);
 void clear(){
   system("cls");
 }
-bool keyDown(int k){
+bool keyDown(unsigned int k){
   return GetAsyncKeyState(k)&0x8000?1:0;
 }
 void moveCursor(int x,int y){
