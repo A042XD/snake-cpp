@@ -9,7 +9,18 @@
 
  */
 
-#include"console.hpp"
+#include<windows.h>
+#include<stdio.h>
+#include<algorithm>
+#include<deque>
+#include<ctime>
+#include<map>
+
+#define pii pair<int,int>
+#define mp std::make_pair
+#define f first
+#define s second
+#define keyDown(k) (GetAsyncKeyState(k)&0x8000?1:0)
 
 using namespace std;
 
@@ -21,6 +32,21 @@ short dir=1,fdx,fdy,length=1;
 bool m[N][N];
 double ind=1.0,last_time;
 
+void moveCursor(int x,int y){
+  HANDLE hOut=GetStdHandle(STD_OUTPUT_HANDLE);
+  COORD pos;
+  pos.X=x,pos.Y=y;
+  SetConsoleCursorPosition(hOut,pos);
+}
+void fill(int x1,int y1,int x2,int y2,char c){
+  for(int i=x1;i<=x2;i++)
+    for(int j=y1;j<=y2;j++)
+      moveCursor(i,j),printf("%c",c);
+}
+void text(int x,int y,const char*s){
+  moveCursor(x,y);
+  printf("%s",s);
+}
 void add(short x,short y){
   sp.push_front(mp(x,y));
   m[x][y]=1;
@@ -38,7 +64,7 @@ signed main(){
 
   // Setup
   srand((unsigned)time(NULL));
-  clear();
+  system("cls");
   text(2,2,"Snake Game");
   fill(2,4,16,18,'.');
   add(9,11);
